@@ -1,0 +1,9 @@
+export const ERROR_RESPONSES = {
+    COMMENT: {
+        NO_COMMENT_FOUND: 'NO_COMMENT_FOUND',
+        FORBIDDEN: 'FORBIDDEN',
+    },
+    GLOBAL: {
+        VALIDATION_ERROR: 'VALIDATION_ERROR',
+    },
+};

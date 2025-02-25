@@ -1,0 +1,10 @@
+
+.dockerignore
+node_modules
+npm-debug.log
+.jest-cache
+dist
+.git
+.DS_STORE
+**/logs
+**/uploads

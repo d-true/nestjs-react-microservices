@@ -1,0 +1,59 @@
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - webapp
+    ports:
+      - "3000:3000"
+      - "3010:3010"
+      - "3011:3011"
+    depends_on:
+      - db
+    restart: always
+    volumes:
+      - upload_volume:/usr/share/nginx/html/uploads
+
+  client:
+    container_name: client
+    env_file:
+      - .env.docker.client
+    build:
+      context: ./client-reactjs
+      dockerfile: Dockerfile
+    networks:
+      - webapp
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - upload_volume:/usr/share/nginx/html/uploads
+
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: "UTC"
+    ports:
+      - "25432:5432"
+    networks:
+      - webapp
+
+
+
+networks:
+  webapp:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  upload_volume:

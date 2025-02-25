@@ -1,0 +1,38 @@
+{
+  "name": "nestjs-react-microservices",
+  "version": "0.0.1",
+  "description": "Typescript Nest.js React boilerplate with Postgres and Redis",
+  "private": false,
+  "keywords": [
+    "Nestjs",
+    "Nest",
+    "React",
+    "Redux",
+    "JWT",
+    "Boilerplate",
+    "Docker",
+    "Jest",
+    "Typescript",
+    "Postgres",
+    "Typeorm",
+    "Microservice",
+    "Microservices"
+  ],
+  "author": "devmastery1@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run db:create:all && npm run seed:create && npm run pm2:start:docker",
+    "pm2:start:docker": " pm2-runtime ./ecosystem.config.js",
+    "seed:create": "npm run --prefix ./user-mcs seed:run:docker",
+    "db:create:user-mcs": "npm run --prefix ./user-mcs db:create:docker",
+    "db:create:comment-mcs": "npm run --prefix ./comment-mcs db:create:docker",
+    "db:create:all": "npm run db:create:user-mcs && npm run db:create:comment-mcs",
+    "migration:run:user-mcs": "npm run --prefix ./user-mcs migration:run:prod:docker",
+    "migration:run:comment-mcs": "npm run --prefix ./comment-mcs migration:run:prod:docker",
+    "migration:run:all": "npm run migration:run:user-mcs && npm run migration:run:comment-mcs"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "pm2": "^5.4.3"
+  }
+}

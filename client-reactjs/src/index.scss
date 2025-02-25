@@ -1,0 +1,85 @@
+.text-center {
+  text-align: center;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.btn {
+  background-color: black;
+  color: #e9ecef;
+  font-size: 1em;
+  cursor: pointer;
+  border: 1px solid #e9ecef;
+  padding: 0.9em 1em;
+}
+
+.form {
+  max-width: 600px;
+  width: 100vw;
+  margin: 2em auto;
+  > input, textarea, select {
+    border: 1px solid #e9ecef;
+    padding: 0.9em 1em;
+  }
+  > input:focus {
+    outline: none;
+  }
+}
+
+.flex {
+  display: flex;
+  gap: 1em;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.mt-4 {
+  margin-top: 40px;
+}
+
+.mb-4 {
+  margin-bottom: 40px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  a {
+    padding: 0 20px;
+  }
+}
+
+.comment-actions {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 30px;
+  text-decoration: underline;
+  color: blue;
+}
+
+.pagination {
+  button {
+    margin: 0 10px;
+    border: 1px solid #e9ecef;
+    padding: 0.9em 1em;
+    cursor: pointer;
+    &[data-active='true'] {
+      background-color: black;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (min-width: 860px) {
+  .register .col-2 img {
+    display: initial;
+  }
+}
