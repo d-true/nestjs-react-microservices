@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, CustomClientOptions } from '@nestjs/microservices';
-import { USER_SERVICE } from '../../constants/app.constants';
+import { USER_SERVICE } from '../../common/constants/app.constants';
 
 @Module({
     imports: [],

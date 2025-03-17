@@ -1,17 +1,22 @@
-import { ApiProperty } from '@nestjs/swagger';
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import { Optional } from '@nestjs/common';
+import {IsDateString, IsString} from "class-validator";
+import {ApiCommonType} from "../../../common/decorators/field.decorators";
 
 export class CommentResDto {
-    @ApiProperty()
+    @ApiCommonType(IsString())
     id!: string;
-    // delete for user type
-    @ApiProperty()
+    // optional for user type role
+    @ApiPropertyOptional()
     @Optional()
+    @IsString()
     userId?: string;
-    @ApiProperty()
+    @ApiCommonType(IsString())
     text!: string;
-    @ApiProperty()
+    @ApiCommonType(IsDateString())
     createdAt!: Date;
-    @ApiProperty()
+    @ApiPropertyOptional()
+    @Optional()
+    @IsDateString()
     deleteOn?: Date;
 }

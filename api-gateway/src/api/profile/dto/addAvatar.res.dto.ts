@@ -1,6 +1,10 @@
-import { AppResponse } from '../../../constants/app.constants';
+import { AppResponse } from '../../../common/constants/app.constants';
+import {ApiCommonType, ApiEnumType} from '../../../common/decorators/field.decorators';
+import {IsString} from "class-validator";
 
 export class AddAvatarResDto {
-    message: AppResponse.SUCCESS;
-    avatar: string;
+    @ApiEnumType(AppResponse.SUCCESS)
+    message!: AppResponse.SUCCESS;
+    @ApiCommonType(IsString())
+    avatar!: string;
 }

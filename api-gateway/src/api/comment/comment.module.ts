@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CommentController } from './comment.controller';
 import { ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, CustomClientOptions } from '@nestjs/microservices';
-import { COMMENT_SERVICE, USER_SERVICE } from '../../constants/app.constants';
+import { COMMENT_SERVICE, USER_SERVICE } from '../../common/constants/app.constants';
 
 @Module({
     imports: [],

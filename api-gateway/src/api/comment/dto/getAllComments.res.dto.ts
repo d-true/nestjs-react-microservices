@@ -1,13 +1,13 @@
-import { PaginationResDto } from '../../../dto/pagination.res.dto';
-import { ApiProperty } from '@nestjs/swagger';
-import { AppResponse } from '../../../constants/app.constants';
+import { PaginationResDto } from '../../../common/dto/pagination.res.dto';
+import { AppResponse } from '../../../common/constants/app.constants';
 import { CommentResDto } from './comment.res.dto';
+import {ApiClassType, ApiEnumType} from '../../../common/decorators/field.decorators';
 
 export class GetAllCommentsResDto {
-    @ApiProperty()
-    message: AppResponse.SUCCESS;
-    @ApiProperty()
-    users: CommentResDto[];
-    @ApiProperty()
-    pagination: PaginationResDto;
+    @ApiEnumType(AppResponse.SUCCESS)
+    message!: AppResponse.SUCCESS;
+    @ApiClassType(CommentResDto, {isArray: true})
+    comments!: CommentResDto[];
+    @ApiClassType(PaginationResDto)
+    pagination!: PaginationResDto;
 }

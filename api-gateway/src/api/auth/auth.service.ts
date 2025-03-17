@@ -1,8 +1,8 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { LoginResDto } from './dto/login.res.dto';
-import { AppErrorResDto } from '../../dto/app.res.dto';
+import { AppErrorResDto } from '../../common/dto/app.res.dto';
 import { firstValueFrom } from 'rxjs';
-import { AppResponse, USER_SERVICE } from '../../constants/app.constants';
+import { AppResponse, USER_SERVICE } from '../../common/constants/app.constants';
 import { Response } from 'express';
 import { LoginReqDto } from './dto/login.req.dto';
 import { ClientProxy } from '@nestjs/microservices';
@@ -10,7 +10,7 @@ import { RegisterReqDto } from './dto/register.req.dto';
 import { RegisterResDto } from './dto/register.res.dto';
 import { RefreshTokenResDto } from './dto/refreshToken.res.dto';
 import { LogoutResDto } from './dto/logout.res.dto';
-import { ERROR_RESPONSES } from '../../constants/errors.constants';
+import { ERROR_RESPONSES } from '../../common/constants/errors.constants';
 import { appResponseError } from '../../utils/app-response.util';
 
 @Injectable()

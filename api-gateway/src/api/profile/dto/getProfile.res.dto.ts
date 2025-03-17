@@ -1,7 +1,10 @@
-import { AppResponse } from '../../../constants/app.constants';
+import { AppResponse } from '../../../common/constants/app.constants';
 import { ProfileDto } from './profile.dto';
+import {ApiClassType, ApiEnumType} from "../../../common/decorators/field.decorators";
 
 export class GetProfileResDto {
-    message: AppResponse.SUCCESS;
+    @ApiEnumType(AppResponse.SUCCESS)
+    message!: AppResponse.SUCCESS;
+    @ApiClassType(ProfileDto)
     profile!: ProfileDto;
 }

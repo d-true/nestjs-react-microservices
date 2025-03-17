@@ -15,6 +15,7 @@ import setupSwagger from './utils/swagger';
 import * as cookieParser from 'cookie-parser';
 import { GlobalExceptionFilter } from './filters/global-exception.filter';
 import { StriptagsPipe } from './pipes/striptags.pipe';
+import {HttpStatusErrorInterceptor} from "./interceptors/http-status.interceptor";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -67,6 +68,7 @@ async function bootstrap() {
 
     app.useGlobalPipes(new StriptagsPipe());
     app.useGlobalFilters(new GlobalExceptionFilter(configService));
+    app.useGlobalInterceptors(new HttpStatusErrorInterceptor());
 
     await app.listen(configService.getOrThrow('app.port', { infer: true }));
 

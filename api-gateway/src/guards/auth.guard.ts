@@ -6,12 +6,12 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { USER_SERVICE } from '../constants/app.constants';
+import { USER_SERVICE } from '../common/constants/app.constants';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { VerifyAccessTokenResDto } from '../api/auth/dto/verifyAccessToken.res.dto';
-import { AppResponse } from '../constants/app.constants';
-import { AppErrorResDto } from '../dto/app.res.dto';
+import { AppResponse } from '../common/constants/app.constants';
+import { AppErrorResDto } from '../common/dto/app.res.dto';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

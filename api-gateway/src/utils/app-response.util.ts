@@ -1,5 +1,5 @@
-import { AppResponse } from '../constants/app.constants';
-import { ERROR_RESPONSES } from '../constants/errors.constants';
+import { AppResponse } from '../common/constants/app.constants';
+import { ERROR_RESPONSES } from '../common/constants/errors.constants';
 
 export function appResponseError(error: string): {
     message: AppResponse.ERROR;

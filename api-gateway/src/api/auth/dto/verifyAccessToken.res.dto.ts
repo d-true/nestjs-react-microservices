@@ -1,15 +1,21 @@
-import { AppResponse } from '../../../constants/app.constants';
-import { ApiProperty } from '@nestjs/swagger';
+import { AppResponse } from '../../../common/constants/app.constants';
+import {ApiClassType, ApiCommonType, ApiEnumType} from "../../../common/decorators/field.decorators";
+import {IsString} from "class-validator";
+
+class VerifyAccessTokenPayloadDto {
+    @ApiCommonType(IsString)
+    id!: string;
+    @ApiCommonType(IsString)
+    role!: string;
+    @ApiCommonType(IsString)
+    sessionId!: string;
+}
+
 
 export class VerifyAccessTokenResDto {
-    @ApiProperty()
+    @ApiEnumType(AppResponse.SUCCESS)
     message!: AppResponse.SUCCESS;
-    @ApiProperty()
-    payload!: {
-        id: string;
-        role: string;
-        sessionId: string;
-        iat: number;
-        exp: number;
-    };
+    @ApiClassType(VerifyAccessTokenPayloadDto)
+    payload!: VerifyAccessTokenPayloadDto;
 }
+

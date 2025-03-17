@@ -15,24 +15,19 @@ import {
 } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, refs } from '@nestjs/swagger';
 import { ClientProxy } from '@nestjs/microservices';
-import { USER_SERVICE } from '../../constants/app.constants';
+import { USER_SERVICE } from '../../common/constants/app.constants';
 import { GetProfileResDto } from './dto/getProfile.res.dto';
 import { AuthGuard } from '../../guards/auth.guard';
 import { firstValueFrom } from 'rxjs';
-import { User } from '../../decorators/user.decorator';
+import { User } from '../../common/decorators/user.decorator';
 import { ProfileDto } from './dto/profile.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AppErrorResDto } from '../../dto/app.res.dto';
+import { AppErrorResDto } from '../../common/dto/app.res.dto';
 import { AddAvatarResDto } from './dto/addAvatar.res.dto';
 import { RemoveAvatarResDto } from './dto/removeAvatar.res.dto';
+import {OkResponseType} from "../../common/decorators/field.decorators";
 
 @Controller('profile')
-@ApiExtraModels(
-    AppErrorResDto,
-    GetProfileResDto,
-    AddAvatarResDto,
-    RemoveAvatarResDto,
-)
 @UseGuards(AuthGuard)
 export class ProfileController {
     constructor(
@@ -40,10 +35,7 @@ export class ProfileController {
     ) {}
 
     @Get()
-    @ApiOkResponse({
-        schema: { anyOf: refs(GetProfileResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(GetProfileResDto, AppErrorResDto)
     async getProfile(
         @User('id') userId: ProfileDto['id'],
     ): Promise<GetProfileResDto | AppErrorResDto> {
@@ -53,9 +45,7 @@ export class ProfileController {
     }
 
     @Post('avatar')
-    @ApiOkResponse({
-        schema: { anyOf: refs(AddAvatarResDto, AppErrorResDto) },
-    })
+    @OkResponseType(AddAvatarResDto, AppErrorResDto)
     @UseInterceptors(FileInterceptor('file'))
     async addAvatar(
         @UploadedFile(
@@ -75,10 +65,7 @@ export class ProfileController {
     }
 
     @Delete('avatar')
-    @ApiOkResponse({
-        schema: { anyOf: refs(RemoveAvatarResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(RemoveAvatarResDto, AppErrorResDto)
     async removeAvatar(
         @User('id') userId: ProfileDto['id'],
     ): Promise<RemoveAvatarResDto | AppErrorResDto> {

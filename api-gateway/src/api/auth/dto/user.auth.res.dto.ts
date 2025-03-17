@@ -1,11 +1,12 @@
-import { IsInt, IsString } from 'class-validator';
+import {IsEnum, IsString} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import {UserRoles} from "../../../common/constants/app.constants";
+import {ApiCommonType} from "../../../common/decorators/field.decorators";
 
 export class UserAuthResDto {
+    @ApiCommonType(IsString())
+    id!: string;
     @ApiProperty()
-    @IsString()
-    id: string;
-    @ApiProperty()
-    @IsInt()
-    roleId: number;
+    @IsEnum(UserRoles)
+    roleId!: UserRoles;
 }

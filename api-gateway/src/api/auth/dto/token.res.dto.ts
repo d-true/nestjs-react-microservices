@@ -1,12 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {IsInt, IsString} from "class-validator";
+import {ApiCommonType} from "../../../common/decorators/field.decorators";
 
 export class TokenResDto {
-    @ApiProperty()
+    @ApiCommonType(IsString())
     accessToken!: string;
-    @ApiProperty()
+    @ApiCommonType(IsString())
     refreshToken!: string;
-    @ApiProperty()
+    @ApiCommonType(IsInt())
     accessTokenExpires!: number;
-    @ApiProperty()
+    @ApiCommonType(IsInt())
     refreshTokenExpires!: number;
 }

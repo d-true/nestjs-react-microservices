@@ -5,12 +5,14 @@ import {
     MinLength,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import {ApiCommonType} from "../../../common/decorators/field.decorators";
 
 export class RegisterReqDto {
-    @ApiProperty()
-    @IsEmail()
+    @ApiCommonType(IsEmail())
     email!: string;
-    @ApiProperty()
+    @ApiProperty({
+        minLength: 8,
+    })
     @IsStrongPassword({
         minLength: 8,
         minLowercase: 0,
@@ -23,7 +25,9 @@ export class RegisterReqDto {
         // minUppercase: 1
     })
     password!: string;
-    @ApiProperty()
+    @ApiProperty({
+        minLength: 3,
+    })
     @MinLength(3)
     @IsString()
     name!: string;

@@ -1,11 +1,9 @@
 import { IsString } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import {ApiCommonType} from "../../../common/decorators/field.decorators";
 
 export class LoginReqDto {
-    @IsString()
-    @ApiProperty()
+    @ApiCommonType(IsString())
     email!: string;
-    @IsString()
-    @ApiProperty()
+    @ApiCommonType(IsString())
     password!: string;
 }

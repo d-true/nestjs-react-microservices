@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import { Environment } from '../constants/app.constants';
+import { Environment } from '../common/constants/app.constants';
 import { AppConfig } from './config.type';
 import * as process from 'node:process';
 

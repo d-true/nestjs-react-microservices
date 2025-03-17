@@ -1,8 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {IsInt} from "class-validator";
 
 export class PaginationResDto {
     @ApiProperty()
-    totalPages: number;
+    @IsInt()
+    totalPages!: number;
     @ApiProperty()
-    currentPage: number;
+    @IsInt()
+    currentPage!: number;
 }

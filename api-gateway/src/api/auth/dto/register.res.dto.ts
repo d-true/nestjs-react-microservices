@@ -1,11 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { TokenResDto } from './token.res.dto';
-import { AppResponse } from '../../../constants/app.constants';
+import { AppResponse } from '../../../common/constants/app.constants';
 import { UserAuthResDto } from './user.auth.res.dto';
+import {ApiClassType, ApiEnumType} from '../../../common/decorators/field.decorators';
 
 export class RegisterResDto extends TokenResDto {
-    @ApiProperty()
+    @ApiEnumType(AppResponse.SUCCESS)
     message!: AppResponse.SUCCESS;
-    @ApiProperty()
+    @ApiClassType(UserAuthResDto)
     user!: UserAuthResDto;
 }

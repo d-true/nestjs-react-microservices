@@ -1,8 +1,6 @@
 import {
     Controller,
     Post,
-    HttpCode,
-    HttpStatus,
     Inject,
     Body,
     UseGuards,
@@ -12,29 +10,22 @@ import {
     Delete,
 } from '@nestjs/common';
 import { AddCommentResDto } from './dto/addComment.res.dto';
-import { ApiExtraModels, ApiOkResponse, refs } from '@nestjs/swagger';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { COMMENT_SERVICE } from '../../constants/app.constants';
-import { AppErrorResDto } from '../../dto/app.res.dto';
+import { COMMENT_SERVICE } from '../../common/constants/app.constants';
+import { AppErrorResDto } from '../../common/dto/app.res.dto';
 import { AuthGuard } from '../../guards/auth.guard';
 import { AddCommentReqDto } from './dto/addComment.req.dto';
-import { User } from '../../decorators/user.decorator';
+import { User } from '../../common/decorators/user.decorator';
 import { GetAllCommentsReqDto } from './dto/getAllComments.req.dto';
 import { EditCommentReqDto } from './dto/editComment.req.dto';
 import { EditCommentResDto } from './dto/editComment.res.dto';
 import { DeleteCommentReqDto } from './dto/deleteComment.req.dto';
 import { GetAllCommentsResDto } from './dto/getAllComments.res.dto';
-import { ValidationPipe } from '@nestjs/common';
+import {DeleteCommentResDto} from "./dto/deleteComment.res.dto";
+import {CreatedResponseType, OkResponseType} from "../../common/decorators/field.decorators";
 
 @Controller('comment')
-@ApiExtraModels(
-    AppErrorResDto,
-    AddCommentResDto,
-    EditCommentReqDto,
-    GetAllCommentsReqDto,
-    DeleteCommentReqDto,
-)
 @UseGuards(AuthGuard)
 export class CommentController {
     constructor(
@@ -43,10 +34,7 @@ export class CommentController {
     ) {}
 
     @Post()
-    @ApiOkResponse({
-        schema: { anyOf: refs(AddCommentResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.CREATED)
+    @CreatedResponseType(AddCommentResDto, AppErrorResDto)
     async addComment(
         @Body() reqDto: AddCommentReqDto,
         @User('id') userId: string,
@@ -60,10 +48,7 @@ export class CommentController {
     }
 
     @Put()
-    @ApiOkResponse({
-        schema: { anyOf: refs(EditCommentReqDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(EditCommentReqDto, AppErrorResDto)
     async editComment(
         @Body() reqDto: EditCommentReqDto,
         @User('id') userId: string,
@@ -77,14 +62,11 @@ export class CommentController {
     }
 
     @Delete()
-    @ApiOkResponse({
-        schema: { anyOf: refs(DeleteCommentReqDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(DeleteCommentResDto, AppErrorResDto)
     async deleteComment(
         @Body() reqDto: DeleteCommentReqDto,
         @User('id') userId: string,
-    ): Promise<DeleteCommentReqDto | AppErrorResDto> {
+    ): Promise<DeleteCommentResDto | AppErrorResDto> {
         return firstValueFrom(
             this.commentServiceClient.send('delete_comment', {
                 userId: userId,
@@ -94,10 +76,7 @@ export class CommentController {
     }
 
     @Get()
-    @ApiOkResponse({
-        schema: { anyOf: refs(GetAllCommentsResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(GetAllCommentsResDto, AppErrorResDto)
     async getAllComments(
         @Query() reqDto: GetAllCommentsReqDto,
         @User('role') roleId: number,

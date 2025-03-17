@@ -1,9 +1,9 @@
 import * as request from 'supertest';
 import * as process from 'node:process';
-import { ERROR_RESPONSES } from '../../src/constants/errors.constants';
+import { ERROR_RESPONSES } from '../../src/common/constants/errors.constants';
 import { appResponseError } from '../../src/utils/app-response.util';
 import { LoginResDto } from '../../src/api/auth/dto/login.res.dto';
-import { AppErrorResDto } from '../../src/dto/app.res.dto';
+import { AppErrorResDto } from '../../src/common/dto/app.res.dto';
 import { RefreshTokenResDto } from '../../src/api/auth/dto/refreshToken.res.dto';
 
 describe('API Auth Module', () => {

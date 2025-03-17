@@ -1,13 +1,14 @@
-import { PaginationResDto } from '../../../dto/pagination.res.dto';
+import { PaginationResDto } from '../../../common/dto/pagination.res.dto';
 import { UserResDto } from './user.res.dto';
-import { ApiProperty } from '@nestjs/swagger';
-import { AppResponse } from '../../../constants/app.constants';
+import { AppResponse } from '../../../common/constants/app.constants';
+import {ApiClassType, ApiEnumType} from '../../../common/decorators/field.decorators';
+import {UserAuthResDto} from "../../auth/dto/user.auth.res.dto";
 
 export class GetAllUsersResDto {
-    @ApiProperty()
-    message: AppResponse.SUCCESS;
-    @ApiProperty()
-    users: UserResDto[];
-    @ApiProperty()
-    pagination: PaginationResDto;
+    @ApiEnumType(AppResponse.SUCCESS)
+    message!: AppResponse.SUCCESS;
+    @ApiClassType(UserAuthResDto, {isArray: true})
+    users!: UserResDto[];
+    @ApiClassType(PaginationResDto)
+    pagination!: PaginationResDto;
 }

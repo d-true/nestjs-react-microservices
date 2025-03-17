@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, CustomClientOptions } from '@nestjs/microservices';
-import { USER_SERVICE } from '../../constants/app.constants';
+import { USER_SERVICE } from '../../common/constants/app.constants';
 import { AuthService } from './auth.service';
 
 @Module({

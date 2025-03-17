@@ -5,7 +5,7 @@ import { AddCommentReqDto } from '../../src/api/comment/dto/addComment.req.dto';
 import { AddCommentResDto } from '../../src/api/comment/dto/addComment.res.dto';
 import { EditCommentResDto } from '../../src/api/comment/dto/editComment.res.dto';
 import { DeleteCommentResDto } from '../../src/api/comment/dto/deleteComment.res.dto';
-import { AppResponse } from '../../src/constants/app.constants';
+import { AppResponse } from '../../src/common/constants/app.constants';
 
 describe('API Comment Module', () => {
     const app = process.env.APP_URL as string;

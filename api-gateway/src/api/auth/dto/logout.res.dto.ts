@@ -1,7 +1,7 @@
-import { AppResponse } from '../../../constants/app.constants';
-import { ApiProperty } from '@nestjs/swagger';
+import { AppResponse } from '../../../common/constants/app.constants';
+import { ApiEnumType } from '../../../common/decorators/field.decorators';
 
 export class LogoutResDto {
-    @ApiProperty()
-    message: AppResponse.SUCCESS;
+    @ApiEnumType(AppResponse.SUCCESS)
+    message!: AppResponse.SUCCESS;
 }

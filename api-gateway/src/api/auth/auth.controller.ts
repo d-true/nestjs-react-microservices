@@ -14,14 +14,15 @@ import { RegisterResDto } from './dto/register.res.dto';
 import { LogoutResDto } from './dto/logout.res.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { ClientProxy } from '@nestjs/microservices';
-import { USER_SERVICE } from '../../constants/app.constants';
+import { USER_SERVICE } from '../../common/constants/app.constants';
 import { Response } from 'express';
-import { AppErrorResDto } from '../../dto/app.res.dto';
+import { AppErrorResDto } from '../../common/dto/app.res.dto';
 import { refs } from '@nestjs/swagger';
 import { ApiExtraModels } from '@nestjs/swagger';
-import { Cookies } from '../../decorators/cookie.decorator';
+import { Cookies } from '../../common/decorators/cookie.decorator';
 import { RefreshTokenResDto } from './dto/refreshToken.res.dto';
 import { AuthService } from './auth.service';
+import {OkResponseType, CreatedResponseType} from "../../common/decorators/field.decorators";
 
 @Controller('auth')
 @ApiExtraModels(
@@ -38,10 +39,7 @@ export class AuthController {
     ) {}
 
     @Post('login')
-    @ApiOkResponse({
-        schema: { anyOf: refs(LoginResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(LoginResDto, AppErrorResDto)
     async login(
         @Body() reqDto: LoginReqDto,
         @Res({ passthrough: true }) response: Response,
@@ -50,10 +48,7 @@ export class AuthController {
     }
 
     @Post('register')
-    @ApiOkResponse({
-        schema: { anyOf: refs(RegisterResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.CREATED)
+    @CreatedResponseType(RegisterResDto, AppErrorResDto)
     async register(
         @Body() reqDto: RegisterReqDto,
         @Res({ passthrough: true }) response: Response,
@@ -62,10 +57,7 @@ export class AuthController {
     }
 
     @Post('refresh')
-    @ApiOkResponse({
-        schema: { anyOf: refs(RefreshTokenResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(RefreshTokenResDto, AppErrorResDto)
     async refreshToken(
         @Cookies('refresh_token') refreshToken: string,
         @Res({ passthrough: true }) response: Response,
@@ -74,10 +66,7 @@ export class AuthController {
     }
 
     @Post('logout')
-    @ApiOkResponse({
-        schema: { anyOf: refs(LogoutResDto, AppErrorResDto) },
-    })
-    @HttpCode(HttpStatus.OK)
+    @OkResponseType(LogoutResDto, AppErrorResDto)
     async logOut(
         @Cookies('refresh_token') refreshToken: string,
         @Res({ passthrough: true }) response: Response,
